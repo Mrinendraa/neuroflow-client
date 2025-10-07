@@ -16,16 +16,22 @@ import BottomToolbar from '../components/ui/BottomToolbar';
 import Sidebar from '../components/ui/Sidebar';
 import CsvReaderNode from '../components/nodes/CsvReaderNode';
 import LinearRegressionNode from '../components/nodes/LinearRegressionNode';
+import MultiLinearRegressionNode from '../components/nodes/MultiLinearRegressionNode';
 import DataCleanerNode from '../components/nodes/DataCleanerNode';
 import BasicNode from '../components/nodes/BasicNode';
+import StartNode from '../components/nodes/StartNode';
+import ModelVisualizerNode from '../components/nodes/ModelVisualizerNode';
 import FloatingEdge from '../components/edges/FloatingEdge';
 import './EditorPage.css';
 
 const nodeTypes = {
   // Existing specialized nodes
+  start: StartNode,
   csvReader: CsvReaderNode,
   linearRegression: LinearRegressionNode,
+  multiLinearRegression: MultiLinearRegressionNode,
   dataCleaner: DataCleanerNode,
+  modelVisualizer: ModelVisualizerNode,
   // Generic/basic nodes for all other sidebar items
   excelReader: BasicNode,
   databaseReader: BasicNode,
@@ -58,9 +64,9 @@ const EditorPage = () => {
   const [nodes, setNodes] = useState([
     {
       id: 'node_0',
-      type: 'csvReader',
+      type: 'start',
       position: { x: 300, y: 300 },
-      data: { label: 'Start Node' },
+      data: { label: 'Start' },
     },
   ]);
   const [edges, setEdges] = useState([]);
