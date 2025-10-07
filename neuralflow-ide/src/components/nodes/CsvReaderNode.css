@@ -1,0 +1,47 @@
+.csv-reader-node.minimal {
+  background-color: #ffffff; /* White background */
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  width: 150px; /* Smaller default size */
+  min-height: 50px;
+  font-family: sans-serif;
+  color: #333;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 8px;
+  font-size: 0.9em;
+  text-align: center;
+}
+
+.react-flow__node.selected .csv-reader-node.minimal {
+  border-color: #007bff; /* Blue selection border */
+  box-shadow: 0 0 0 2px #007bff; /* Blue glow on selection */
+}
+
+.node-label {
+  font-weight: normal; /* Less bold */
+}
+
+/* Custom handles for connection points */
+.custom-handle {
+  width: 8px !important;
+  height: 8px !important;
+  background-color: #666 !important; /* Darker handle for contrast */
+  border: 1px solid #fff !important;
+  opacity: 0; /* Hidden by default */
+  transition: opacity 0.2s ease-in-out;
+}
+
+/* Show handles on node hover/selection */
+.csv-reader-node.minimal:hover .custom-handle,
+.react-flow__node.selected .custom-handle {
+  opacity: 1;
+}
+
+/* Position handles more subtly */
+.react-flow__handle.react-flow__handle-top { top: -4px; border-radius: 50%; }
+.react-flow__handle.react-flow__handle-bottom { bottom: -4px; border-radius: 50%; }
+.react-flow__handle.react-flow__handle-left { left: -4px; border-radius: 50%; }
+.react-flow__handle.react-flow__handle-right { right: -4px; border-radius: 50%; }

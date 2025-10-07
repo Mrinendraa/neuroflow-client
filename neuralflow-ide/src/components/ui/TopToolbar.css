@@ -1,0 +1,135 @@
+.top-toolbar {
+  position: absolute;
+  top: 15px;
+  left: 0;
+  right: 0;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 20px;
+  z-index: 1000;
+  pointer-events: none; /* Allow clicks to pass through to canvas */
+}
+
+/* Move the center toolbar slightly to the right */
+.main-toolbar {
+  transform: translateX(70px);
+}
+
+
+/* Hamburger menu in separate circle */
+.hamburger-container {
+  pointer-events: auto;
+}
+
+.hamburger-button {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background-color: #ffffff;
+  border: 1px solid #e0e0e0;
+  color: #333333;
+  font-size: 1.5em;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.hamburger-button:hover {
+  background-color: #f8f9fa;
+  transform: scale(1.05);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
+}
+
+/* Main floating oval toolbar */
+.main-toolbar {
+  background-color: #ffffff;
+  border: 1px solid #e0e0e0;
+  border-radius: 30px;
+  padding: 8px 20px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  pointer-events: auto;
+}
+
+.toolbar-center {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.icon-button {
+  background: none;
+  border: none;
+  color: #333333;
+  font-size: 1.3em;
+  padding: 10px;
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s;
+  width: 40px;
+  height: 40px;
+}
+
+.icon-button:hover {
+  background-color: #f8f9fa;
+  transform: scale(1.1);
+}
+
+.icon-button.selected {
+  background-color: #007bff;
+  color: white;
+  transform: scale(1.1);
+}
+
+.icon-button.selected:hover {
+  background-color: #0056b3;
+}
+
+/* Share and Library in separate oval */
+.actions-toolbar {
+  background-color: #ffffff;
+  border: 1px solid #e0e0e0;
+  border-radius: 30px;
+  padding: 8px 20px;
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  pointer-events: auto;
+}
+
+.action-button {
+  background: none;
+  border: none;
+  color: #333333;
+  font-size: 1em;
+  padding: 8px 12px;
+  border-radius: 20px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  transition: all 0.2s;
+  font-weight: 500;
+}
+
+.action-button:hover {
+  background-color: #f8f9fa;
+  transform: scale(1.05);
+}
+
+.action-button span {
+  font-size: 0.9em;
+}
+
+/* Pan tool cursor */
+.pan-active .react-flow__pane {
+  cursor: grab !important;
+}

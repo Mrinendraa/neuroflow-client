@@ -1,0 +1,147 @@
+.data-cleaner-node {
+  background: #ffffff;
+  border: 1px solid #e5e7eb;
+  border-radius: 16px;
+  color: #111827;
+  min-width: 240px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+  overflow: visible; /* allow ReactFlow handles to show outside the node */
+}
+
+/* Modern header with green accent (Data Preprocessing vibe) */
+.node-header {
+  display: flex;
+  align-items: center;
+  padding: 14px 16px;
+  background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+  color: #ffffff;
+}
+
+.node-icon {
+  margin-right: 10px;
+  font-size: 1.25rem;
+  color: #ffffff;
+  filter: drop-shadow(0 1px 2px rgba(0,0,0,0.15));
+}
+
+.node-title {
+  flex: 1;
+  font-weight: 700;
+  font-size: 0.98rem;
+  letter-spacing: -0.01em;
+}
+
+.config-button {
+  background: rgba(255, 255, 255, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  border-radius: 10px;
+  color: #ffffff;
+  padding: 8px 10px;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.config-button:hover {
+  background: rgba(255, 255, 255, 0.3);
+  transform: translateY(-1px);
+  box-shadow: 0 6px 18px rgba(0,0,0,0.15);
+}
+
+.config-panel {
+  padding: 16px;
+  background: #f9fafb;
+  border-top: 1px solid #f3f4f6;
+  max-height: 260px; /* add scroll area */
+  overflow-y: auto;
+  scrollbar-width: thin;
+  scrollbar-color: #cbd5e1 #f3f4f6;
+}
+
+/* webkit scrollbar */
+.config-panel::-webkit-scrollbar { width: 8px; }
+.config-panel::-webkit-scrollbar-track { background: #f3f4f6; border-radius: 6px; }
+.config-panel::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 6px; }
+.config-panel::-webkit-scrollbar-thumb:hover { background: #94a3b8; }
+
+.config-section {
+  margin-bottom: 16px;
+  position: relative;
+  padding-left: 12px; /* room for accent bar */
+}
+
+.config-section:last-child { margin-bottom: 0; }
+
+/* Accent bar at left of each section */
+.config-section::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 2px;
+  bottom: 2px;
+  width: 4px;
+  border-radius: 4px;
+  background: #3b82f6; /* default, overridden below */
+}
+
+/* Stronger and varied colors per section */
+.config-section:nth-child(1)::before { background: #2563eb; } /* blue-600 */
+.config-section:nth-child(2)::before { background: #059669; } /* emerald-600 */
+.config-section:nth-child(3)::before { background: #d97706; } /* amber-600 */
+.config-section:nth-child(4)::before { background: #dc2626; } /* red-600 */
+.config-section:nth-child(5)::before { background: #7c3aed; } /* violet-600 */
+.config-section:nth-child(6)::before { background: #0891b2; } /* cyan-600 */
+
+/* Heading chips for visibility */
+.config-section label {
+  display: inline-flex;
+  align-items: center;
+  font-size: 1rem; /* larger for visibility */
+  font-weight: 800;
+  color: #0f172a; /* slate-900 */
+  margin-bottom: 10px;
+  padding: 6px 12px;
+  border-radius: 9999px;
+  background: #eef2ff; /* default; overridden below */
+  border: 1px solid rgba(15, 23, 42, 0.08);
+}
+
+.config-section:nth-child(1) label { background: #dbeafe; color: #1e40af; border-color: #93c5fd; }
+.config-section:nth-child(2) label { background: #d1fae5; color: #065f46; border-color: #86efac; }
+.config-section:nth-child(3) label { background: #fef3c7; color: #92400e; border-color: #fde68a; }
+.config-section:nth-child(4) label { background: #fee2e2; color: #7f1d1d; border-color: #fecaca; }
+.config-section:nth-child(5) label { background: #ede9fe; color: #5b21b6; border-color: #ddd6fe; }
+.config-section:nth-child(6) label { background: #cffafe; color: #155e75; border-color: #a5f3fc; }
+
+.config-section label input[type="checkbox"] { margin-right: 8px; }
+
+.config-section input[type="number"],
+.config-section select {
+  width: 100%;
+  padding: 10px 12px;
+  border: 1px solid #e5e7eb;
+  border-radius: 10px;
+  background: #ffffff;
+  color: #111827;
+  font-size: 0.95rem;
+  transition: box-shadow 0.2s ease, border-color 0.2s ease, transform 0.1s ease;
+}
+
+.config-section input[type="number"]:focus,
+.config-section select:focus {
+  outline: none;
+  border-color: #2563eb;
+  box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.15);
+  transform: translateY(-1px);
+}
+
+/* Ensure ReactFlow handles remain visible and easy to grab on this node */
+.data-cleaner-node .react-flow__handle {
+  width: 10px;
+  height: 10px;
+  background: #111827 !important;
+  border: 2px solid #ffffff;
+  box-shadow: 0 0 0 2px rgba(0,0,0,0.1);
+}
