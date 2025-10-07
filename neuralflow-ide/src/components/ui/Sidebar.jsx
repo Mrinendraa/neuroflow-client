@@ -47,6 +47,7 @@ const Sidebar = ({ className = '' }) => {
       icon: FaChartLine,
       nodes: [
         { type: 'linearRegression', name: 'Linear Regression', icon: FaChartLine },
+        { type: 'multiLinearRegression', name: 'Multi Linear Regression', icon: FaChartLine },
         { type: 'polynomialRegression', name: 'Polynomial Regression', icon: FaChartBar },
         { type: 'ridgeRegression', name: 'Ridge Regression', icon: FaChartLine },
         { type: 'lassoRegression', name: 'Lasso Regression', icon: FaChartLine },

@@ -1,0 +1,21 @@
+.model-visualizer-node {
+  background: #ffffff;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  padding: 8px;
+  width: 280px;
+  min-height: 200px;
+  font-family: sans-serif;
+}
+
+.mv-title {
+  font-weight: 600;
+  margin-bottom: 6px;
+}
+
+.mv-placeholder {
+  font-size: 0.85em;
+  color: #666;
+}
+
+
