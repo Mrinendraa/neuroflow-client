@@ -1,0 +1,161 @@
+# ============================================================
+#  Node & Dependency directories
+# ============================================================
+node_modules/
+bower_components/
+jspm_packages/
+web_modules/
+
+# ============================================================
+#  Build & Distribution directories
+# ============================================================
+dist/
+dist-ssr/
+build/
+out/
+release/
+tmp/
+temp/
+.cache/
+.esbuild/
+.next/
+.vite/
+*.tsbuildinfo
+
+# ============================================================
+#  Electron specific
+# ============================================================
+# Electron build output
+app/dist/
+app/build/
+app/out/
+# Electron Forge / Builder / Packager artifacts
+/dist_electron/
+/out_electron/
+/build_electron/
+/releases/
+/electron-builder.yaml
+
+# ============================================================
+#  TypeScript
+# ============================================================
+*.tsbuildinfo
+tsconfig.tsbuildinfo
+
+# ============================================================
+#  Logs & Diagnostic files
+# ============================================================
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+*.log
+logs/
+debug.log
+*.pid
+*.seed
+*.pid.lock
+
+# ============================================================
+#  Environment variables
+# ============================================================
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# ============================================================
+#  OS / Editor specific files
+# ============================================================
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+Icon?
+._*
+
+# Windows
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+
+# Linux
+*~
+
+# VSCode
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+
+# JetBrains / WebStorm
+.idea/
+*.iml
+
+# ============================================================
+#  Testing & Coverage
+# ============================================================
+coverage/
+*.lcov
+.nyc_output/
+__tests__/temp/
+jest-cache/
+jest-html-reporters-*
+.cypress/
+playwright-report/
+test-results/
+
+# ============================================================
+#  React / React Flow specific
+# ============================================================
+# React Flow stores generated JSON graphs or temp layouts sometimes
+flow-diagrams.json
+*.flowstate.json
+
+# React build cache
+/.parcel-cache
+/.webpack-cache
+/.reactflow-cache
+
+# ============================================================
+#  Package Managers lockfiles (optional, uncomment if needed)
+# ============================================================
+# yarn.lock
+# package-lock.json
+# pnpm-lock.yaml
+
+# ============================================================
+#  Miscellaneous
+# ============================================================
+*.swp
+*.swo
+*.bak
+*.orig
+*.rej
+*.tmp
+*.temp
+*.old
+*.zip
+*.tar.gz
+*.tgz
+
+# ============================================================
+#  Optional: Local tools / Lint / Format cache
+# ============================================================
+.eslintcache
+.stylelintcache
+.prettiercache
+.npmrc
+.nodemonignore
+
+# ============================================================
+#  Optional: Firebase / AWS / Docker / etc.
+# ============================================================
+.firebase/
+.aws/
+.dockerignore
+docker-compose.override.yml
+
