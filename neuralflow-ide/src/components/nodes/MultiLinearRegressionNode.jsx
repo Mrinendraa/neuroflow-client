@@ -11,18 +11,30 @@ const MultiLinearRegressionNode = ({ id, data, isConnectable }) => {
   const [trainMsg, setTrainMsg] = useState('');
   const { setNodes } = useReactFlow();
 
-  const upstreamCsv = useStore((store) => {
+  const upstreamData = useStore((store) => {
     const incoming = Array.from(store.edges.values()).filter((e) => e.target === id);
     for (const e of incoming) {
       const src = store.nodeInternals.get(e.source);
       if (src?.type === 'csvReader') {
-        return { headers: src.data?.headers || [], file: src.data?.file };
+        return { 
+          type: 'csv', 
+          headers: src.data?.headers || [], 
+          file: src.data?.file 
+        };
+      }
+      if (src?.type === 'encoder') {
+        return { 
+          type: 'encoded', 
+          headers: src.data?.headers || [], 
+          encodedRows: src.data?.encodedRows || [],
+          encodingInfo: src.data?.encodingInfo || {}
+        };
       }
     }
     return null;
   });
 
-  const headers = useMemo(() => upstreamCsv?.headers || [], [upstreamCsv]);
+  const headers = useMemo(() => upstreamData?.headers || [], [upstreamData]);
 
   const toggleX = (h) => {
     setSelectedX((prev) => (prev.includes(h) ? prev.filter((c) => c !== h) : [...prev, h]));
@@ -30,8 +42,8 @@ const MultiLinearRegressionNode = ({ id, data, isConnectable }) => {
 
   const onRun = async () => {
     setTrainMsg('');
-    if (!upstreamCsv?.file) {
-      alert('Please connect a CSV/Excel node with a loaded file.');
+    if (!upstreamData) {
+      alert('Please connect a CSV/Excel node or Encoder node.');
       return;
     }
     if (selectedX.length === 0 || !yCol) {
@@ -40,9 +52,21 @@ const MultiLinearRegressionNode = ({ id, data, isConnectable }) => {
     }
     setIsTraining(true);
     try {
-      const { headers: hs, rows } = await parseFullTabularFile(upstreamCsv.file);
-      const xIdx = selectedX.map((c) => hs.indexOf(c));
-      const yIdx = hs.indexOf(yCol);
+      let rows;
+      
+      if (upstreamData.type === 'csv') {
+        // Parse from CSV file
+        const parsed = await parseFullTabularFile(upstreamData.file);
+        rows = parsed.rows;
+      } else if (upstreamData.type === 'encoded') {
+        // Use pre-encoded data
+        rows = upstreamData.encodedRows;
+      } else {
+        throw new Error('Unknown data source type.');
+      }
+
+      const xIdx = selectedX.map((c) => headers.indexOf(c));
+      const yIdx = headers.indexOf(yCol);
       if (xIdx.some((i) => i === -1) || yIdx === -1) throw new Error('Selected columns not found.');
 
       const X = []; // with intercept term
