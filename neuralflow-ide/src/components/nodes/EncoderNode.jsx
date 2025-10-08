@@ -12,19 +12,39 @@ const EncoderNode = ({ id, data, isConnectable }) => {
   const [error, setError] = useState('');
   const { setNodes } = useReactFlow();
 
-  // Find upstream CSV node
-  const upstreamCsv = useStore((store) => {
+  // Find upstream CSV, Encoder, or Normalizer node
+  const upstreamData = useStore((store) => {
     const incoming = Array.from(store.edges.values()).filter((e) => e.target === id);
     for (const e of incoming) {
       const src = store.nodeInternals.get(e.source);
       if (src?.type === 'csvReader') {
-        return { headers: src.data?.headers || [], file: src.data?.file };
+        return { 
+          type: 'csv', 
+          headers: src.data?.headers || [], 
+          file: src.data?.file 
+        };
+      }
+      if (src?.type === 'encoder') {
+        return { 
+          type: 'encoded', 
+          headers: src.data?.headers || [], 
+          encodedRows: src.data?.encodedRows || [],
+          encodingInfo: src.data?.encodingInfo || {}
+        };
+      }
+      if (src?.type === 'normalizer') {
+        return { 
+          type: 'normalized', 
+          headers: src.data?.headers || [], 
+          normalizedRows: src.data?.normalizedRows || [],
+          normalizationInfo: src.data?.normalizationInfo || {}
+        };
       }
     }
     return null;
   });
 
-  const headers = useMemo(() => upstreamCsv?.headers || [], [upstreamCsv]);
+  const headers = useMemo(() => upstreamData?.headers || [], [upstreamData]);
 
   const toggleColumn = (header) => {
     setSelectedColumns(prev => 
@@ -35,8 +55,8 @@ const EncoderNode = ({ id, data, isConnectable }) => {
   };
 
   const onEncode = async () => {
-    if (!upstreamCsv?.file) {
-      setError('Please connect a CSV/Excel node with a loaded file.');
+    if (!upstreamData) {
+      setError('Please connect a CSV/Excel node, Encoder node, or Normalizer node.');
       return;
     }
     if (selectedColumns.length === 0) {
@@ -48,8 +68,21 @@ const EncoderNode = ({ id, data, isConnectable }) => {
     setError('');
 
     try {
-      // Parse the full dataset
-      const { headers: allHeaders, rows } = await parseFullTabularFile(upstreamCsv.file);
+      let rows;
+      
+      if (upstreamData.type === 'csv') {
+        // Parse from CSV file
+        const parsed = await parseFullTabularFile(upstreamData.file);
+        rows = parsed.rows;
+      } else if (upstreamData.type === 'encoded') {
+        // Use pre-encoded data
+        rows = upstreamData.encodedRows;
+      } else if (upstreamData.type === 'normalized') {
+        // Use pre-normalized data
+        rows = upstreamData.normalizedRows;
+      } else {
+        throw new Error('Unknown data source type.');
+      }
       
       // Create encoding configuration
       const encodingConfig = {};
@@ -58,7 +91,7 @@ const EncoderNode = ({ id, data, isConnectable }) => {
       });
 
       // Apply encoding
-      const result = encodeDataset(rows, allHeaders, encodingConfig);
+      const result = encodeDataset(rows, headers, encodingConfig);
       
       // Get first 5 rows for preview
       const previewRows = result.encodedRows.slice(0, 5);
@@ -80,7 +113,7 @@ const EncoderNode = ({ id, data, isConnectable }) => {
             headers: result.headers,
             encodedRows: result.encodedRows,
             encodingInfo: result.encodingInfo,
-            originalFile: upstreamCsv.file
+            originalData: upstreamData
           } 
         };
       }));
@@ -97,7 +130,7 @@ const EncoderNode = ({ id, data, isConnectable }) => {
     setSelectedColumns([]);
     setError('');
     setNodes((nds) => nds.map((n) => 
-      n.id === id ? { ...n, data: { ...n.data, headers: [], encodedRows: [], encodingInfo: {} } } : n
+      n.id === id ? { ...n, data: { ...n.data, headers: [], encodedRows: [], encodingInfo: {}, originalData: null } } : n
     ));
   };
 
