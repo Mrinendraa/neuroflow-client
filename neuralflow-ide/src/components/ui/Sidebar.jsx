@@ -39,6 +39,7 @@ const Sidebar = ({ className = '' }) => {
       icon: FaFilter,
       nodes: [
         { type: 'dataCleaner', name: 'Data Cleaner', icon: FaCogs },
+        { type: 'encoder', name: 'Encoder', icon: FaCogs },
         { type: 'normalizer', name: 'Normalizer', icon: FaChartLine },
         { type: 'scaler', name: 'Scaler', icon: FaRandom },
         { type: 'featureSelector', name: 'Feature Selector', icon: FaTools },

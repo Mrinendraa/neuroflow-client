@@ -18,20 +18,40 @@ const LinearRegressionNode = ({ id, data, isConnectable }) => {
   const [trainMsg, setTrainMsg] = useState('');
   const { setNodes } = useReactFlow();
 
-  // Inspect incoming edge to find the upstream CSV node and its headers/file
-  const upstreamCsv = useStore((store) => {
+  // Inspect incoming edge to find the upstream CSV node or Encoder node
+  const upstreamData = useStore((store) => {
     const incoming = Array.from(store.edges.values()).filter((e) => e.target === id);
     if (incoming.length === 0) return null;
     for (const e of incoming) {
       const src = store.nodeInternals.get(e.source);
       if (src?.type === 'csvReader') {
-        return { headers: src.data?.headers || [], file: src.data?.file };
+        return { 
+          type: 'csv', 
+          headers: src.data?.headers || [], 
+          file: src.data?.file 
+        };
+      }
+      if (src?.type === 'encoder') {
+        return { 
+          type: 'encoded', 
+          headers: src.data?.headers || [], 
+          encodedRows: src.data?.encodedRows || [],
+          encodingInfo: src.data?.encodingInfo || {}
+        };
+      }
+      if (src?.type === 'normalizer') {
+        return { 
+          type: 'normalized', 
+          headers: src.data?.headers || [], 
+          normalizedRows: src.data?.normalizedRows || [],
+          normalizationInfo: src.data?.normalizationInfo || {}
+        };
       }
     }
     return null;
   });
 
-  const headers = useMemo(() => upstreamCsv?.headers || [], [upstreamCsv]);
+  const headers = useMemo(() => upstreamData?.headers || [], [upstreamData]);
 
   const toggleConfig = () => {
     setIsConfigOpen(!isConfigOpen);
@@ -39,8 +59,8 @@ const LinearRegressionNode = ({ id, data, isConnectable }) => {
 
   const onRun = async () => {
     setTrainMsg('');
-    if (!upstreamCsv?.file) {
-      alert('Please connect a CSV/Excel node with a loaded file.');
+    if (!upstreamData) {
+      alert('Please connect a CSV/Excel node or Encoder node.');
       return;
     }
     if (!xCol || !yCol) {
@@ -49,10 +69,26 @@ const LinearRegressionNode = ({ id, data, isConnectable }) => {
     }
     setIsTraining(true);
     try {
-      const { headers: hs, rows } = await parseFullTabularFile(upstreamCsv.file);
-      const xi = hs.indexOf(xCol);
-      const yi = hs.indexOf(yCol);
+      let rows;
+      
+      if (upstreamData.type === 'csv') {
+        // Parse from CSV file
+        const parsed = await parseFullTabularFile(upstreamData.file);
+        rows = parsed.rows;
+      } else if (upstreamData.type === 'encoded') {
+        // Use pre-encoded data
+        rows = upstreamData.encodedRows;
+      } else if (upstreamData.type === 'normalized') {
+        // Use pre-normalized data
+        rows = upstreamData.normalizedRows;
+      } else {
+        throw new Error('Unknown data source type.');
+      }
+
+      const xi = headers.indexOf(xCol);
+      const yi = headers.indexOf(yCol);
       if (xi === -1 || yi === -1) throw new Error('Selected columns not found.');
+      
       const X = [];
       const Y = [];
       for (const r of rows) {
