@@ -1,4 +1,4 @@
-.model-visualizer-node {
+.data-visualizer-node {
   background: #ffffff;
   border: 1px solid #ccc;
   border-radius: 4px;
@@ -10,59 +10,51 @@
   flex-direction: column;
 }
 
-.mv-title {
+.dv-title {
   font-weight: 600;
   margin-bottom: 8px;
   font-size: 14px;
   color: #333;
 }
 
-.mv-controls {
+.dv-controls {
   margin-bottom: 8px;
   display: flex;
   flex-direction: column;
   gap: 8px;
 }
 
-.mv-tabs {
+.dv-chart-type,
+.dv-column-select {
   display: flex;
+  flex-direction: column;
   gap: 4px;
 }
 
-.mv-tab {
-  padding: 4px 8px;
+.dv-chart-type label,
+.dv-column-select label {
+  font-size: 12px;
+  font-weight: 500;
+  color: #555;
+}
+
+.dv-chart-type select,
+.dv-column-select select {
+  padding: 4px 6px;
   border: 1px solid #ddd;
-  background: #f5f5f5;
   border-radius: 3px;
   font-size: 12px;
-  cursor: pointer;
-  transition: all 0.2s;
+  background: white;
 }
 
-.mv-tab:hover {
-  background: #e5e5e5;
-}
-
-.mv-tab.active {
-  background: #1976d2;
-  color: white;
+.dv-chart-type select:focus,
+.dv-column-select select:focus {
+  outline: none;
   border-color: #1976d2;
+  box-shadow: 0 0 0 2px rgba(25, 118, 210, 0.2);
 }
 
-.mv-checkbox {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  font-size: 12px;
-  color: #555;
-  cursor: pointer;
-}
-
-.mv-checkbox input[type="checkbox"] {
-  margin: 0;
-}
-
-.mv-content {
+.dv-content {
   flex: 1;
   display: flex;
   align-items: center;
@@ -70,39 +62,11 @@
   min-height: 320px;
 }
 
-.mv-placeholder {
+.dv-placeholder {
   font-size: 0.85em;
   color: #666;
   text-align: center;
   padding: 20px;
-}
-
-.mv-metrics {
-  display: flex;
-  justify-content: space-between;
-  margin-top: 8px;
-  padding-top: 8px;
-  border-top: 1px solid #eee;
-  gap: 8px;
-}
-
-.metric {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  flex: 1;
-}
-
-.metric-label {
-  font-size: 11px;
-  color: #666;
-  font-weight: 500;
-}
-
-.metric-value {
-  font-size: 12px;
-  font-weight: 600;
-  color: #1976d2;
 }
 
 /* Custom handles for connection points */
@@ -116,13 +80,7 @@
 }
 
 /* Show handles on node hover/selection */
-.model-visualizer-node:hover .custom-handle,
+.data-visualizer-node:hover .custom-handle,
 .react-flow__node.selected .custom-handle {
   opacity: 1;
 }
-
-
-
-
-
-

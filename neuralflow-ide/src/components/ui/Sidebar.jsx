@@ -9,10 +9,11 @@ import {
 } from 'react-icons/fa';
 
 const Sidebar = ({ className = '' }) => {
-  // Default open File Loading and Data Preprocessing per UI
+  // Default open File Loading, Data Preprocessing, and Visualization per UI
   const [expandedCategories, setExpandedCategories] = useState({
     'File Loading': true,
     'Data Preprocessing': true,
+    'Visualization': true,
   });
 
   const toggleCategory = (category) => {
@@ -71,11 +72,18 @@ const Sidebar = ({ className = '' }) => {
         { type: 'transformer', name: 'Transformer', icon: FaBrain },
       ],
     },
+    'Visualization': {
+      icon: FaChartBar,
+      nodes: [
+        { type: 'modelVisualizer', name: 'Model Visualizer', icon: FaChartLine },
+        { type: 'dataVisualizer', name: 'Data Visualizer', icon: FaChartPie },
+      ],
+    },
     'Miscellaneous': {
       icon: FaCog,
       nodes: [
         { type: 'evaluator', name: 'Model Evaluator', icon: FaChartBar },
-        { type: 'visualizer', name: 'Data Visualizer', icon: FaChartPie },
+        { type: 'visualizer', name: 'Generic Visualizer', icon: FaChartPie },
         { type: 'exporter', name: 'Model Exporter', icon: FaTools },
       ],
     },
