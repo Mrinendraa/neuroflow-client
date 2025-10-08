@@ -21,6 +21,7 @@ import DataCleanerNode from '../components/nodes/DataCleanerNode';
 import BasicNode from '../components/nodes/BasicNode';
 import StartNode from '../components/nodes/StartNode';
 import ModelVisualizerNode from '../components/nodes/ModelVisualizerNode';
+import DataVisualizerNode from '../components/nodes/DataVisualizerNode';
 import FloatingEdge from '../components/edges/FloatingEdge';
 import './EditorPage.css';
 
@@ -32,6 +33,7 @@ const nodeTypes = {
   multiLinearRegression: MultiLinearRegressionNode,
   dataCleaner: DataCleanerNode,
   modelVisualizer: ModelVisualizerNode,
+  dataVisualizer: DataVisualizerNode,
   // Generic/basic nodes for all other sidebar items
   excelReader: BasicNode,
   databaseReader: BasicNode,
