@@ -1,41 +1,41 @@
-.encoder-node {
+.normalizer-node {
   background: #ffffff;
   border: 1px solid #ccc;
   border-radius: 4px;
   padding: 8px;
-  width: 300px;
+  width: 320px;
   min-height: 120px;
   font-family: sans-serif;
   font-size: 0.9em;
 }
 
-.encoder-header {
+.normalizer-header {
   margin-bottom: 8px;
 }
 
-.encoder-title {
+.normalizer-title {
   font-weight: 600;
   font-size: 1em;
 }
 
-.encoder-content {
+.normalizer-content {
   display: flex;
   flex-direction: column;
   gap: 8px;
 }
 
-.encoding-type-section {
+.normalization-type-section {
   display: flex;
   align-items: center;
   gap: 8px;
 }
 
-.encoding-type-section label {
+.normalization-type-section label {
   font-weight: 500;
-  min-width: 100px;
+  min-width: 120px;
 }
 
-.encoding-type-section select {
+.normalization-type-section select {
   flex: 1;
   padding: 4px 6px;
   border: 1px solid #ccc;
@@ -82,7 +82,7 @@
   margin: 0;
 }
 
-.encoder-actions {
+.normalizer-actions {
   display: flex;
   gap: 6px;
 }
@@ -97,14 +97,14 @@
 }
 
 .btn.primary {
-  background: #007bff;
+  background: #28a745;
   color: white;
-  border-color: #007bff;
+  border-color: #28a745;
 }
 
 .btn.primary:hover:not(:disabled) {
-  background: #0056b3;
-  border-color: #0056b3;
+  background: #218838;
+  border-color: #1e7e34;
 }
 
 .btn.secondary {
@@ -132,7 +132,7 @@
   border-radius: 3px;
 }
 
-.encoded-preview {
+.normalized-preview {
   margin-top: 8px;
 }
 
@@ -147,6 +147,7 @@
   overflow: auto;
   border: 1px solid #eee;
   border-radius: 3px;
+  margin-bottom: 8px;
 }
 
 .table-scroll table {
@@ -169,15 +170,38 @@
   font-weight: 600;
 }
 
-.encoding-badge {
+.normalization-badge {
   display: inline-block;
-  background: #e9ecef;
-  color: #495057;
+  background: #d4edda;
+  color: #155724;
   padding: 1px 4px;
   border-radius: 2px;
   font-size: 0.7em;
   margin-left: 4px;
   font-weight: normal;
+}
+
+.normalization-stats {
+  background: #f8f9fa;
+  border: 1px solid #dee2e6;
+  border-radius: 3px;
+  padding: 6px;
+  font-size: 0.8em;
+}
+
+.stats-title {
+  font-weight: 600;
+  margin-bottom: 4px;
+  color: #495057;
+}
+
+.stat-item {
+  margin-bottom: 2px;
+  color: #6c757d;
+}
+
+.stat-item strong {
+  color: #495057;
 }
 
 

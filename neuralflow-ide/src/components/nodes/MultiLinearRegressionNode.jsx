@@ -30,6 +30,14 @@ const MultiLinearRegressionNode = ({ id, data, isConnectable }) => {
           encodingInfo: src.data?.encodingInfo || {}
         };
       }
+      if (src?.type === 'normalizer') {
+        return { 
+          type: 'normalized', 
+          headers: src.data?.headers || [], 
+          normalizedRows: src.data?.normalizedRows || [],
+          normalizationInfo: src.data?.normalizationInfo || {}
+        };
+      }
     }
     return null;
   });
@@ -61,6 +69,9 @@ const MultiLinearRegressionNode = ({ id, data, isConnectable }) => {
       } else if (upstreamData.type === 'encoded') {
         // Use pre-encoded data
         rows = upstreamData.encodedRows;
+      } else if (upstreamData.type === 'normalized') {
+        // Use pre-normalized data
+        rows = upstreamData.normalizedRows;
       } else {
         throw new Error('Unknown data source type.');
       }

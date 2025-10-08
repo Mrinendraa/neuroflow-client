@@ -82,3 +82,5 @@ export function encodeDataset(rows, headers, encodingConfig) {
     headers: [...headers] // Headers remain the same
   };
 }
+
+

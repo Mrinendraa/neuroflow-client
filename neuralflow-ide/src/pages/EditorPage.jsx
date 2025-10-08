@@ -22,6 +22,7 @@ import BasicNode from '../components/nodes/BasicNode';
 import StartNode from '../components/nodes/StartNode';
 import ModelVisualizerNode from '../components/nodes/ModelVisualizerNode';
 import EncoderNode from '../components/nodes/EncoderNode';
+import NormalizerNode from '../components/nodes/NormalizerNode';
 import FloatingEdge from '../components/edges/FloatingEdge';
 import './EditorPage.css';
 
@@ -34,10 +35,10 @@ const nodeTypes = {
   dataCleaner: DataCleanerNode,
   modelVisualizer: ModelVisualizerNode,
   encoder: EncoderNode,
+  normalizer: NormalizerNode,
   // Generic/basic nodes for all other sidebar items
   excelReader: BasicNode,
   databaseReader: BasicNode,
-  normalizer: BasicNode,
   scaler: BasicNode,
   featureSelector: BasicNode,
   polynomialRegression: BasicNode,
